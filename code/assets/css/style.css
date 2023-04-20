@@ -722,8 +722,8 @@ li#quarter-first span {
 	}
 
 	#quarter-first {
-		left: 630px;
-		top: 0
+		left: 525px;
+		top: 105px
 	}
 
 	#quarter-second {
@@ -732,13 +732,13 @@ li#quarter-first span {
 	}
 
 	#quarter-third {
-		left: 525px;
+		left: 630px;
 		top: 105px
 	}
 
 	#quarter-fourth {
 		left: 630px;
-		top: 105px
+		top: 0
 	}
 }
 
