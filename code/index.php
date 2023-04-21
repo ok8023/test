@@ -1,72 +1,50 @@
-<?php require_once './include/front/header.php'; ?>
-        
-        <div class="layui-tab layui-tab-brief">
-            <ul class="layui-tab-title">
-                <li class="layui-this">热门</li>
-                <?php
-                    foreach ($tool_data as $tool_data_key => $tool_data_value) {
-                        echo '<li>'.$tool_data_value['name'].'</li>';
-                    }
-                ?>
-            </ul>
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    <div class="layui-bg-gray" style="padding: 5px">
-                        <div class="layui-row layui-col-space10">
-                            <?php
-                                foreach ($tool_data as $tool_data_key => $tool_data_value) {
-                                    foreach ($tool_data_value as $tool_data_value_key => $tool_data_value_value) {
-                                        if ($tool_data_value_key != 'name' and $tool_data_value_value['hot']) {
-                                            echo '
-                                                <div class="layui-col-md3">
-                                                    <div class="layui-card">
-                                                        <div class="layui-card-header">
-                                                            <a href="./tool/'.$tool_data_key.'/'.$tool_data_value_key.'.php">['.$tool_data_value['name'].']'.$tool_data_value_value['name'].'</a>
-                                                        </div>
-                                                        <div class="layui-card-body">'
-                                                            .$tool_data_value_value['keyword'].'<br>
-                                                            使用次数:'.$tool_times_data[$tool_data_key][$tool_data_value_key].
-                                                        '</div>
-                                                    </div>
-                                                </div>
-                                            ';
-                                        }
-                                    }
-                                }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <?php
-                    foreach ($tool_data as $tool_data_key => $tool_data_value) {
-                        echo '
-                            <div class="layui-tab-item">
-                                <div class="layui-bg-gray" style="padding: 5px;">
-                                    <div class="layui-row layui-col-space10">
-                        ';
-                        foreach ($tool_data_value as $tool_data_value_key => $tool_data_value_value) {
-                            if ($tool_data_value_key != 'name') {
-                                echo '
-                                    <div class="layui-col-md3">
-                                        <div class="layui-card">
-                                            <div class="layui-card-header">
-                                                <a href="./tool/'.$tool_data_key.'/'.$tool_data_value_key.'.php">'.$tool_data_value_value['name'].'</a>
-                                            </div>
-                                            <div class="layui-card-body">'
-                                                .$tool_data_value_value['keyword'].'<br>
-                                                使用次数:'.$tool_times_data[$tool_data_key][$tool_data_value_key].
-                                            '</div>
-                                        </div>
-                                    </div>
-                                ';
-                            }
-                        }
-                        echo '
-                                </div>
-                            </div>
-                        </div>
-                        ';
-                    }
-                ?>
-        
-<?php require_once './include/front/footer.php'; ?>
+<?php
+define("DEVELOPER_MODE", false);
+if (DEVELOPER_MODE) {
+    tideways_xhprof_enable();
+}
+
+$timeRequestStart = microtime(true);
+
+//$_SERVER['REQUEST_URI'] = "/User/100369-api.html
+ini_set("display_errors", "Off");
+ini_set("log_errors", "Off");
+
+$_ENV['WPF_URL_PATH_SUFFIX'] = '/wpf';
+
+// mock
+require_once (__DIR__ . "/lib/mock.php");
+
+// adapt to duckchat-gagaphp.
+if (!empty($_GET['action'])) {
+    $action = isset($_GET['action']) ? $_GET['action'] : "";
+    $action =  ucwords($action, '.');
+    $controllerName  = str_replace(".", "_", $action);
+
+    $_ENV['WPF_URL_CONTROLLER_NAME'] = $controllerName;
+    $_ENV['WPF_URL_CONTROLLER_METHOD_PARAM_NAME'] = "doIndex";
+}
+
+
+if(!isset($_ENV['WPF_URL_CONTROLLER_NAME'])) {
+    $_ENV['WPF_URL_CONTROLLER_NAME'] = "Page_Index";
+    $_ENV['WPF_URL_CONTROLLER_METHOD_PARAM_NAME'] = isset($_GET['method'] ) ? $_GET['method']  : "doIndex" ;
+}
+
+require_once(__DIR__ . "/lib/wpf/init.php");
+
+if (DEVELOPER_MODE) {
+    $config = require_once (__DIR__ . "/config.developer.php");
+    $logDir = $config["xhprofDir"];
+    $timeRequestEnd = microtime(true);
+    $timeCost = intval(($timeRequestEnd - $timeRequestStart) * 1000);
+    if ($timeCost > 100) {
+        $data = tideways_xhprof_disable();
+        file_put_contents(
+            "{$logDir}/{$timeCost}ms" . uniqid() . ".file.xhprof",
+            serialize($data)
+        );
+    } else {
+        tideways_xhprof_disable();
+    }
+}
