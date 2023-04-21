@@ -1,0 +1,75 @@
+{
+    "qq": {
+        "name": "QQ",
+        "kandian_qq_number": {
+            "name": "看点QQ账号",
+            "keyword": "QQ看点账号",
+            "hot": true
+        },
+        "revise_online_model": {
+            "name": "修改在线机型",
+            "keyword": "QQ修改iPhone13在线",
+            "hot": true
+        },
+        "information": {
+            "name": "信息",
+            "keyword": "QQ资料查询"
+        },
+        "force_add_friend": {
+            "name": "强制加好友",
+            "keyword": "QQ强制加好友",
+            "hot": true
+        },
+        "generate_add_group_url": {
+            "name": "生成加群链接",
+            "keyword": "生成加群链接"
+        }
+    },
+    "convenience": {
+        "name": "便民",
+        "honor_king_minimum_glory_combat_effectiveness": {
+            "name": "王者荣耀最低荣耀战力",
+            "keyword": "王者战力查询"
+        },
+        "calculation_relative_relation": {
+            "name": "计算亲戚关系"
+        },
+        "information_probe": {
+            "name": "信息探针",
+            "keyword": "照妖镜,查询对方IP、GPS、照片",
+            "hot": true
+        },
+        "image_caricature": {
+            "name": "图像漫画化",
+            "keyword": "人物漫画化"
+        },
+        "image_exif": {
+            "name": "图像EXIF",
+            "keyword": "查询图片信息"
+        },
+        "short_video_analysis": {
+            "name": "短视频解析",
+            "keyword": "抖音解析,快手解析",
+            "hot": true
+        }
+    },
+    "development": {
+        "name": "开发",
+        "ping": {
+            "name": "Ping",
+            "keyword": "IP延迟"
+        },
+        "icp": {
+            "name": "域名备案信息",
+            "keyword": "查询ICP"
+        },
+        "ip_location": {
+            "name": "IP定位",
+            "keyword": "IP归属"
+        },
+        "whois": {
+            "name": "Whois",
+            "keyword": "域名信息"
+        }
+    }
+}
