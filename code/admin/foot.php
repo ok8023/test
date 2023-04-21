@@ -1,1 +1,0 @@
-<div id="footer">Copyright &copy; <span style="color:#FF5200">影视网</span><span style="color:#0065FF">.Cn</span> , Powered by <a href="https://jq.qq.com/?_wv=1027&k=Siuu3tEX" target="_blank">源码下载</a></div>
